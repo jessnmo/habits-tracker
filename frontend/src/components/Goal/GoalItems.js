@@ -17,22 +17,19 @@ const GoalItems = ({ id, title, completed }) => {
 	};
 
 	return (
-		<li className={`list-group-item ${completed && 'list-group-item-success'}`}>
-			<div className="d-flex justify-content-between">
-				<span className="d-flex align-items-center">
-					<input
-						onChange={handelComplete}
-						type="checkbox"
-						checked={completed}
-						defaultChecked={false}
-					></input>
-					{title}
-				</span>
-				<button onClick={handelDelete} className="btn btn-danger">
-					Delete
-				</button>
-			</div>
-		</li>
+		<div>
+			<input
+				onChange={handelComplete}
+				type="checkbox"
+				checked={completed}
+				defaultChecked={false}
+			></input>
+			{title}
+
+			<button onClick={handelDelete} className="btn btn-danger">
+				Delete
+			</button>
+		</div>
 	);
 };
 

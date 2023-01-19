@@ -11,12 +11,12 @@ const GoalList = () => {
 	}, [dispatch]);
 
 	return (
-		<ul className="list-group">
-			{goals.map((todo) => (
+		<ul>
+			{goals.map((goal) => (
 				<GoalItems
-					key={todo.id}
-					title={todo.title}
-					completed={todo.completed}
+					key={goal.id}
+					title={goal.title}
+					completed={goal.completed}
 				/>
 			))}
 		</ul>
