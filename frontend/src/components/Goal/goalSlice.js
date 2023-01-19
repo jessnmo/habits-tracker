@@ -1,4 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+export const getGoalsAsync = createAsyncThunk(
+	'goal/getGoalsAsync',
+	async () => {
+		const response = await fetch(
+			'https://project-happy-thoughts-api-fg6vuzfhaa-ez.a.run.app/thoughts'
+		);
+		if (response.success.true) {
+			const goal = await response.json();
+			return { goal }; //once returned will dispatch an action, goals will be in the payload
+		}
+	}
+);
 
 const goalSlice = createSlice({
 	name: 'goal',
@@ -39,6 +52,11 @@ const goalSlice = createSlice({
 		},
 		deleteGoal: (state, action) => {
 			return state.filter((goal) => goal.id !== action.payload.id);
+		},
+	},
+	extraReducers: {
+		[getGoalsAsync.fulfilled]: (state, action) => {
+			return action.payload.goal;
 		},
 	},
 });

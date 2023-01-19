@@ -21,10 +21,10 @@ const GoalItems = ({ id, title, completed }) => {
 			<div className="d-flex justify-content-between">
 				<span className="d-flex align-items-center">
 					<input
-						onClick={handelComplete}
+						onChange={handelComplete}
 						type="checkbox"
-						className="mr-3"
 						checked={completed}
+						defaultChecked={false}
 					></input>
 					{title}
 				</span>
