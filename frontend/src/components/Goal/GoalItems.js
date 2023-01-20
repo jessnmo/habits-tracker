@@ -17,19 +17,19 @@ const GoalItems = ({ id, title, completed }) => {
 	};
 
 	return (
-		<div>
-			<input
-				onChange={handelComplete}
-				type="checkbox"
-				checked={completed}
-				defaultChecked={false}
-			></input>
-			{title}
-
-			<button onClick={handelDelete} className="btn btn-danger">
-				Delete
-			</button>
-		</div>
+		<li>
+			<div>
+				<span>
+					<input
+						type="checkbox"
+						checked={completed}
+						onChange={handelComplete}
+					></input>
+					{title}
+				</span>
+				<button onClick={handelDelete}>Delete</button>
+			</div>
+		</li>
 	);
 };
 

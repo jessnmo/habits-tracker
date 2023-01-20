@@ -1,14 +1,32 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+const api =
+	'https://project-happy-thoughts-api-fg6vuzfhaa-ez.a.run.app/thoughts';
+
 export const getGoalsAsync = createAsyncThunk(
 	'goal/getGoalsAsync',
 	async () => {
-		const response = await fetch(
-			'https://project-happy-thoughts-api-fg6vuzfhaa-ez.a.run.app/thoughts'
-		);
-		if (response.success.true) {
+		const response = await fetch(api);
+		if (response.ok) {
+			const goals = await response.json();
+			return { goals }; //once returned will dispatch an action, goals will be in the payload
+		}
+	}
+);
+
+export const addGoalAsync = createAsyncThunk(
+	'goal/addGoalAsync',
+	async (payload) => {
+		const response = await fetch(api, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ title: payload.title }),
+		});
+		if (response.ok) {
 			const goal = await response.json();
-			return { goal }; //once returned will dispatch an action, goals will be in the payload
+			return { goal };
 		}
 	}
 );
@@ -34,7 +52,7 @@ const goalSlice = createSlice({
 		{
 			id: 3,
 			title: 'todo3',
-			completed: true,
+			completed: false,
 		},
 	],
 	reducers: {
@@ -47,15 +65,23 @@ const goalSlice = createSlice({
 			state.push(newGoal);
 		},
 		toggleComplete: (state, action) => {
-			const index = state.findIndex((goal) => goal.id === action.payload.id); //find the index of goal based on id
+			const index = state.findIndex((goal) => goal.id === action.payload.id); //finding the index of the goals in the array base on the id
+			//if (index > -1) {
 			state[index].completed = action.payload.completed;
+			//}
+			//return [...state];
 		},
+
 		deleteGoal: (state, action) => {
-			return state.filter((goal) => goal.id !== action.payload.id);
+			return state.filter((goal) => goal.id !== action.payload.id); //only the goal that doesn't have the same id as the clicked ones will be returned, otherwise they're select to remove
 		},
 	},
 	extraReducers: {
+		[getGoalsAsync.pending]: (state, action) => {
+			console.log('fetching');
+		},
 		[getGoalsAsync.fulfilled]: (state, action) => {
+			console.log('fetching succeed');
 			return action.payload.goal;
 		},
 	},
