@@ -10,7 +10,7 @@ import goalReducer from './components/Goal/goalSlice';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const reducer = combineReducers({
-	goal: goalReducer,
+	goals: goalReducer,
 });
 const store = configureStore({ reducer });
 root.render(

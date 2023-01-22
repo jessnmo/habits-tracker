@@ -3,35 +3,32 @@
 
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addGoal } from './goalSlice';
+//import { addGoals } from './goalSlice';
+import { addGoalAsync } from './goalSlice';
 
 const AddGoal = () => {
 	const [value, setValue] = useState('');
 	const dispatch = useDispatch();
-
-	const onSubmit = (event) => {
+	const handleFormSubmit = (event) => {
 		event.preventDefault();
 		dispatch(
-			addGoal({
+			addGoalAsync({
 				title: value,
 			})
 		);
 	};
 
 	return (
-		<form onSubmit={onSubmit} className="form-inline mt-3 mb-3">
-			<label className="sr-only">Name</label>
+		<form onSubmit={handleFormSubmit}>
+			<label>What to complete next?</label>
 			<input
 				type="text"
-				className="form-control mb-2 mr-sm-2"
-				placeholder="Add todo..."
+				placeholder="Add goal..."
 				value={value}
 				onChange={(event) => setValue(event.target.value)}
 			></input>
 
-			<button type="submit" className="btn btn-primary mb-2">
-				Submit
-			</button>
+			<button type="submit">Submit</button>
 		</form>
 	);
 };

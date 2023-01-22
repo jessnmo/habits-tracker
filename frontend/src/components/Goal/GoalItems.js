@@ -1,19 +1,17 @@
 import { useDispatch } from 'react-redux';
-import { toggleComplete, deleteGoal } from './goalSlice';
+import { deleteGoal } from './goalSlice';
+import { toggleCompleteAsync } from './goalSlice';
 
 const GoalItems = ({ id, title, completed }) => {
 	const dispatch = useDispatch();
-	const handelComplete = () => {
-		dispatch(
-			toggleComplete({
-				id: id,
-				completed: !completed, //once clicked false will be true
-			})
-		);
+
+	const handleComplete = () => {
+		console.log('handleComplete', id, completed);
+		dispatch(toggleCompleteAsync({ id: id, completed: !completed }));
 	};
 
-	const handelDelete = () => {
-		dispatch(deleteGoal({ id: id }));
+	const handleDelete = () => {
+		dispatch(deleteGoal({ id: id })); //it needs to know the id as we're filtering the id, so we're passing it as the payload
 	};
 
 	return (
@@ -23,11 +21,11 @@ const GoalItems = ({ id, title, completed }) => {
 					<input
 						type="checkbox"
 						checked={completed}
-						onChange={handelComplete}
+						onChange={handleComplete}
 					></input>
 					{title}
 				</span>
-				<button onClick={handelDelete}>Delete</button>
+				<button onClick={handleDelete}>Delete</button>
 			</div>
 		</li>
 	);
