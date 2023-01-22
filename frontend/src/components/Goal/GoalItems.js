@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
-import { deleteGoal } from './goalSlice';
-import { toggleCompleteAsync } from './goalSlice';
+//import { deleteGoal } from './goalSlice';
+import { toggleCompleteAsync, deleteGoalAsync } from './goalSlice';
 
 const GoalItems = ({ id, title, completed }) => {
 	const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const GoalItems = ({ id, title, completed }) => {
 	};
 
 	const handleDelete = () => {
-		dispatch(deleteGoal({ id: id })); //it needs to know the id as we're filtering the id, so we're passing it as the payload
+		dispatch(deleteGoalAsync({ id })); //it needs to know the id as we're filtering the id, so we're passing it as the payload
 	};
 
 	return (

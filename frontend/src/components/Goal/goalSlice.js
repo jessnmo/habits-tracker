@@ -46,27 +46,28 @@ export const toggleCompleteAsync = createAsyncThunk(
 	}
 );
 
+export const deleteGoalAsync = createAsyncThunk(
+	'goals/deleteGoal',
+	async (payload) => {
+		const response = await fetch(`http://localhost:8080/goals/${payload.id}`, {
+			method: 'DELETE',
+			headers: {
+				'Content-type': 'application/json',
+			},
+			body: JSON.stringify({ id: payload.id }),
+		});
+		if (response.ok) {
+			return { id: payload.id };
+		}
+	}
+);
+
 const goalSlice = createSlice({
 	name: 'goals',
 	initialState: [
 		{
-			id: 0,
-			title: 'goal',
-			completed: false,
-		},
-		{
-			id: 1,
-			title: 'goal1',
-			completed: false,
-		},
-		{
-			id: 2,
-			title: 'goal2',
-			completed: false,
-		},
-		{
-			id: 3,
-			title: 'goal3',
+			id: Date.now(),
+			title: '',
 			completed: false,
 		},
 	],
@@ -119,6 +120,9 @@ const goalSlice = createSlice({
 				return newState;
 			}
 			return state;
+		},
+		[deleteGoalAsync.fulfilled]: (state, action) => {
+			return state.filter((goal) => goal.id !== action.payload.id);
 		},
 	},
 });
