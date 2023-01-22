@@ -11,6 +11,7 @@ const AddGoal = () => {
 	const dispatch = useDispatch();
 	const handleFormSubmit = (event) => {
 		event.preventDefault();
+		setValue('');
 		dispatch(
 			addGoalAsync({
 				title: value,
