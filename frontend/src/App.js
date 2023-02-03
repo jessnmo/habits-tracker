@@ -2,6 +2,8 @@
 import AddGoal from './components/Goal/AddGoal';
 import GoalList from './components/Goal/GoalList';
 import TotalCompleted from './components/Goal/TotalCompleted';
+import HabitContainer from './components/Habits/HabitContainer';
+//import HabitHeader from './components/Habits/HabitHeader';
 
 const App = () => {
 	return (
@@ -9,6 +11,8 @@ const App = () => {
 			<AddGoal />
 			<GoalList />
 			<TotalCompleted />
+			{/* <HabitHeader /> */}
+			<HabitContainer />
 		</>
 	);
 };

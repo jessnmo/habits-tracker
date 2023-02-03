@@ -1,13 +1,13 @@
-//Component containing habit items, the strip you see
 import { RiDeleteBin3Line } from 'react-icons/ri';
 
-const Habits = ({ id, text, number }) => {
+const AddHabit = () => {
 	return (
 		<div className="stickerContainer">
 			<div className="frequency">
-				<p>{text}</p>
-				<p>Targeted Frequency: </p> <p>{number} times/week</p>
-				{/* This is dynamic based on the input from the header */}
+				<input type="text" placeholder="type to add a habit" />
+				<label htmlFor="">Targeted Frequency:</label>
+				<input type="number" min={1} max={7} />
+				<p>times/week</p>
 			</div>
 
 			{/* Container for weekday and checkbox view */}
@@ -57,4 +57,4 @@ const Habits = ({ id, text, number }) => {
 	);
 };
 
-export default Habits;
+export default AddHabit;
