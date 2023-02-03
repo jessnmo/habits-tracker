@@ -2,11 +2,16 @@ import Habits from './Habits';
 import AddHabit from './AddHabit';
 
 //component containing all the habits, all the notes with details
-const HabitList = ({ notes, handleAddNote }) => {
+const HabitList = ({ notes, handleAddNote, handleDeleteNote }) => {
 	return (
 		<div className="HabitList">
 			{notes.map((note) => (
-				<Habits id={note.id} text={note.text} number={note.number} />
+				<Habits
+					id={note.id}
+					text={note.text}
+					number={note.number}
+					handleDeleteNote={handleDeleteNote}
+				/>
 			))}
 			<AddHabit handleAddNote={handleAddNote} />{' '}
 			{/* pass it as a prop so making sure AddHabit has access to the function addNote */}

@@ -1,7 +1,7 @@
 //Component containing habit items, the strip you see
 import { RiDeleteBin3Line } from 'react-icons/ri';
 
-const Habits = ({ id, text, number }) => {
+const Habits = ({ id, text, number, handleDeleteNote }) => {
 	return (
 		<div className="stickerContainer">
 			<div className="frequency">
@@ -50,7 +50,7 @@ const Habits = ({ id, text, number }) => {
 
 				<div className="progressDetail">
 					<p> /7</p>
-					<RiDeleteBin3Line />
+					<RiDeleteBin3Line onClick={() => handleDeleteNote(id)} />
 				</div>
 			</div>
 		</div>

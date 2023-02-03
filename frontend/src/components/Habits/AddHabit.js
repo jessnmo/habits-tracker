@@ -11,9 +11,11 @@ const AddHabit = ({ handleAddNote }) => {
 	};
 
 	const handleNewNoteClick = () => {
-		handleAddNote(noteText, targetValue); // when add habit is clicked, the addNote function will be called, getting access to what's stored in the noteText
-		setNoteText('');
-		setTargetValue(1);
+		if (noteText.trim().length > 0) {
+			handleAddNote(noteText, targetValue); // when add habit is clicked, the addNote function will be called, getting access to what's stored in the noteText
+			setNoteText('');
+			setTargetValue(1);
+		}
 	};
 
 	return (
