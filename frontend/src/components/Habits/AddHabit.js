@@ -1,13 +1,40 @@
+import { useState } from 'react';
 import { RiDeleteBin3Line } from 'react-icons/ri';
 
-const AddHabit = () => {
+const AddHabit = ({ handleAddNote }) => {
+	const [noteText, setNoteText] = useState('');
+	const [targetValue, setTargetValue] = useState(1);
+
+	const handleNoteChange = (event) => {
+		event.preventDefault();
+		setNoteText(event.target.value);
+	};
+
+	const handleNewNoteClick = () => {
+		handleAddNote(noteText); // when add habit is clicked, the addNote function will be called, getting access to what's stored in the noteText
+	};
+
 	return (
 		<div className="stickerContainer">
 			<div className="frequency">
-				<input type="text" placeholder="type to add a habit" />
-				<label htmlFor="">Targeted Frequency:</label>
-				<input type="number" min={1} max={7} />
+				<input
+					type="text"
+					placeholder="type to add a habit"
+					value={noteText}
+					onChange={handleNoteChange}
+				/>
+				<label htmlFor="target">Targeted Frequency:</label>
+				<input
+					id="target"
+					type="number"
+					min={1}
+					max={7}
+					value={targetValue}
+					onChange={(e) => setTargetValue(e.target.value)}
+				/>
+
 				<p>times/week</p>
+				<button onClick={handleNewNoteClick}>Add Habit</button>
 			</div>
 
 			{/* Container for weekday and checkbox view */}
