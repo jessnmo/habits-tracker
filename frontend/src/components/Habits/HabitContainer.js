@@ -26,8 +26,7 @@ const HabitContainer = () => {
 		},
 	]);
 
-	const addNote = (text) => {
-		console.log(text); //accepting the text user typed
+	/* const addNote = (noteText, targetValue) => {
 		const newNote = {
 			id: nanoid,
 			text: text,
@@ -35,11 +34,15 @@ const HabitContainer = () => {
 		};
 		const newNotes = [...notes, newNote]; //adding the new note to the end of the current note array
 		setNotes(newNotes);
+	}; */
+
+	const handleAddNote = (noteText, targetValue) => {
+		setNotes([...notes, { id: nanoid, text: noteText, number: targetValue }]);
 	};
 
 	return (
 		<>
-			<HabitList notes={notes} handleAddNote={addNote} />
+			<HabitList notes={notes} handleAddNote={handleAddNote} />
 		</>
 	);
 };
