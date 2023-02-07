@@ -1,30 +1,12 @@
 import HabitList from './HabitList';
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
+import { useEffect } from 'react';
 
 const HabitContainer = () => {
-	const [notes, setNotes] = useState([
-		{
-			text: 'hit the gym',
-			number: 5,
-			id: nanoid(),
-		},
-		{
-			text: 'note2',
-			number: 1,
-			id: nanoid(),
-		},
-		{
-			text: 'note3',
-			number: 2,
-			id: nanoid(),
-		},
-		{
-			text: 'test new note',
-			number: 7,
-			id: nanoid(),
-		},
-	]);
+	const [notes, setNotes] = useState(
+		JSON.parse(localStorage.getItem('notes')) || []
+	);
 
 	/* const addNote = (noteText, targetValue) => {
 		const newNote = {
@@ -35,6 +17,9 @@ const HabitContainer = () => {
 		const newNotes = [...notes, newNote]; //adding the new note to the end of the current note array
 		setNotes(newNotes);
 	}; */
+	useEffect(() => {
+		localStorage.setItem('notes', JSON.stringify(notes));
+	}, [notes]);
 
 	const handleAddNote = (noteText, targetValue) => {
 		setNotes([...notes, { id: nanoid, text: noteText, number: targetValue }]);
